@@ -1,0 +1,56 @@
+{
+  "name": "jquery-express-file-upload",
+  "version": "1.0.0",
+  "description": "A minimal example of a file upload Web application with a jQuery client and an Express.js server.",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tom-weatherhead/jquery-express-file-upload.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tom-weatherhead/jquery-express-file-upload/issues"
+  },
+  "scripts": {
+    "lint": "grunt eslint",
+    "start": "nodemon server.js",
+    "test": "grunt test",
+    "watch": "grunt watch"
+  },
+  "dependencies": {
+    "express": "latest",
+    "express-fileupload": "latest",
+    "jquery": "latest",
+    "nodemon": "latest",
+    "rootpath": "latest"
+  },
+  "devDependencies": {
+    "babel-cli": "latest",
+    "babel-preset-env": "latest",
+    "grunt": "latest",
+    "grunt-cli": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-eslint": "latest",
+    "grunt-mocha-test": "latest",
+    "grunt-nsp": "latest",
+    "mocha": "latest"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "keywords": [
+    "eslint",
+    "express",
+    "grunt",
+    "jquery",
+    "mocha",
+    "node",
+    "nsp",
+    "upload"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Tom Weatherhead",
+    "url": "https://github.com/tom-weatherhead"
+  }
+}

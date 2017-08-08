@@ -4,49 +4,40 @@
 	<head>
 		<title>jQuery Express.js File Upload</title>
 		<meta charset="utf-8" />
-        <!-- <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" /> -->
-
-		<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"> -->
-		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
 	</head>
 
 	<body>
-		<script type="text/javascript">
-			$("#form2").submit(function (event) {
-				$.post('file_upload', $('#form').serialize());
-				event.preventDefault();
-			});
-			
-			// Variable to store your files
-			var files;
-
-			// Add events
-			// $('input[type=file]').on('change', prepareUpload);
-
-			// Grab the files and set them to our variable
-			function prepareUpload(event)
-			{
-				files = event.target.files;
-			}
-		</script>
 		<h3>jQuery Express.js File Upload</h3>
 		Select a file to upload:
 		<br />
+
 		<!-- <form action="http://127.0.0.1:8081/file_upload" method="POST" enctype="multipart/form-data"> -->
 		<!-- <form id="form" action="http://127.0.0.1:8081/file_upload" method="POST" enctype="application/x-www-form-urlencoded"> -->
 		<!-- <form id="form" enctype="multipart/form-data" method="post"> -->
 			<!-- <input type="file" name="file" size="50" /> -->
 			<!-- <input type="file" id="file" name="file" required /> -->
+
+			<!-- The <input> of type "file" must have a name; -->
+			<!-- If it is named "foo", then the file data will be POSTed to the server as req.files.foo -->
+
 			<input type="file" id="file" name="file" />
 			<br />
 			<!-- <input type="submit" value="Upload File" /> -->
-			<!-- <input id="Buckwheat" type="button" value="Upload File" onclick="buckwheat(117)" /> -->
-			<!-- <input id="Buckwheat" type="button" value="Upload File" onclick="buckwheat()" /> -->
 			<input id="uploadButton" type="button" value="Upload File" />
 		<!-- </form> -->
-		<!-- <input id="Buckwheat" type="button" value="Upload File" onclick="buckwheat" /> -->
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js">
+		</script>
 		<script>
+			//$("#form").submit(function (event) {
+			//	...
+			//	$.post('file_upload', $('form').serialize());	// ?
+			//	event.preventDefault();
+			//});
+
 			$("#uploadButton").click(function(){
+				console.log('#uploadButton click');
 				// See https://stackoverflow.com/questions/5392344/sending-multipart-formdata-with-jquery-ajax :
 				var data = new FormData();
 				//jQuery.each(jQuery('#file')[0].files, function(i, file) {
@@ -55,15 +46,10 @@
 
 				// See https://stackoverflow.com/questions/6974684/how-to-send-formdata-objects-with-ajax-requests-in-jquery :
 				var fileGoodness = $("#file")[0].files[0];
-				//var fileGoodness = $("#file").files[0];
 				console.log('fileGoodness:', fileGoodness);
-				//alert('fileGoodness: ' + JSON.stringify(fileGoodness));
-				//alert('fileGoodness: ' + fileGoodness.name);
-				//data.append( 'file', input.files[0] );
 				data.append('file', fileGoodness);
 
 				$.ajax({
-					//url: 'http://example.com/script.php',
 					url: '/',
 					data: data,
 					cache: false,

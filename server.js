@@ -23,19 +23,15 @@ app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/index.html'); // TW TODO: Use path.join
 });
 
-app.post('/form', function(req, res) {
-	console.log('POST /form');
-	res.send('POST /form');
-});
-
-app.post('/noform', function(req, res) {
-	console.log('POST /noform');
+app.post('/', function(req, res) {
+	console.log('POST /');
 	console.log('req.files is', req.files);
 
-	if (req.files) {
+	if (req.files && req.files.file) {
 		// TODO: If the directory __dirname + '/uploads does not exist, create it.
-		var destPath = __dirname + '/uploads/' + req.files.fileNoForm.name;
-		fs.writeFile(destPath, req.files.fileNoForm.data, function (errorWriteFile) {
+		let fileObject = req.files.file;
+		var destPath = __dirname + '/uploads/' + fileObject.name;
+		fs.writeFile(destPath, fileObject.data, function (errorWriteFile) {
 			
 			if (errorWriteFile) {
 				console.error('Error while saving uploaded file:', error);
@@ -46,8 +42,8 @@ app.post('/noform', function(req, res) {
 			}
 		});
 	} else {
-		console.error('req.files is empty.');
-		res.status(500).send('req.files is empty.');
+		console.error('req.files is empty or req.files.file is empty.');
+		res.status(500).send('req.files is empty or req.files.file is empty.');
 	}
 });
 

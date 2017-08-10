@@ -12,23 +12,34 @@
 		Select a file to upload:
 		<br />
 
-		<!-- <form action="http://127.0.0.1:8081/file_upload" method="POST" enctype="multipart/form-data"> -->
-		<!-- <form id="form" action="http://127.0.0.1:8081/file_upload" method="POST" enctype="application/x-www-form-urlencoded"> -->
-		<!-- <form id="form" enctype="multipart/form-data" method="post"> -->
-			<!-- <input type="file" name="file" size="50" /> -->
-			<!-- <input type="file" id="file" name="file" required /> -->
-
-			<!-- The <input> of type "file" must have a name; -->
-			<!-- If it is named "foo", then the file data will be POSTed to the server as req.files.foo -->
-
-			<input type="file" id="file" name="file" />
+		<div>
+			<h4>Case 1 : Using a Form</h4>
 			<br />
-			<!-- <input type="submit" value="Upload File" /> -->
-			<input id="uploadButton" type="button" value="Upload File" />
-		<!-- </form> -->
+			<!-- <form action="http://127.0.0.1:8081/file_upload" method="POST" enctype="multipart/form-data"> -->
+			<!-- <form id="form" action="http://127.0.0.1:8081/file_upload" method="POST" enctype="application/x-www-form-urlencoded"> -->
+			<!-- <form id="form" enctype="multipart/form-data" method="post"> -->
+				<!-- <input type="file" name="file" size="50" /> -->
+				<!-- <input type="file" id="file" name="file" required /> -->
 
-		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js">
-		</script>
+				<!-- The <input> of type "file" must have a name; -->
+				<!-- If it is named "foo", then the file data will be POSTed to the server as req.files.foo -->
+
+				<input type="file" id="file" name="file" />
+				<br />
+				<!-- <input type="submit" value="Upload File" /> -->
+				<input id="uploadButton" type="button" value="Upload File" />
+			<!-- </form> -->
+		</div>
+
+		<div>
+			<h4>Case 2 : Not Using a Form</h4>
+			<br />
+			<input type="file" id="fileNoForm" name="fileNoForm" />
+			<br />
+			<input id="uploadButtonNoForm" type="button" value="Upload File" />
+		</div>
+
+		<script type="text/javascript" src="/jquery.min.js"></script>
 		<script>
 			//$("#form").submit(function (event) {
 			//	...
@@ -36,8 +47,8 @@
 			//	event.preventDefault();
 			//});
 
-			$("#uploadButton").click(function(){
-				console.log('#uploadButton click');
+			$("#uploadButtonNoForm").click(function () {
+				console.log('#uploadButtonNoForm click');
 				// See https://stackoverflow.com/questions/5392344/sending-multipart-formdata-with-jquery-ajax :
 				var data = new FormData();
 				//jQuery.each(jQuery('#file')[0].files, function(i, file) {
@@ -45,12 +56,13 @@
 				//});
 
 				// See https://stackoverflow.com/questions/6974684/how-to-send-formdata-objects-with-ajax-requests-in-jquery :
-				var fileGoodness = $("#file")[0].files[0];
+				const fileKeyName = 'fileNoForm';	// If fileKeyName is 'foo', the file data will be accessible in the server's app.post(req, res) event handler as req.files.foo
+				var fileGoodness = $("#fileNoForm")[0].files[0];
 				console.log('fileGoodness:', fileGoodness);
-				data.append('file', fileGoodness);
+				data.append(fileKeyName, fileGoodness);
 
 				$.ajax({
-					url: '/',
+					url: '/noform',
 					data: data,
 					cache: false,
 					processData: false,
@@ -58,6 +70,10 @@
 					type: 'POST',
 					success: function(result){
 						alert('Ajax POST success! : ' + result);
+					},
+					error: function(error){
+						//alert('Ajax POST error : ' + error);
+						alert('Ajax POST error.');
 					}
 				});
 			});

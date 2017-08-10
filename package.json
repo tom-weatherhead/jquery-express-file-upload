@@ -12,6 +12,7 @@
   },
   "scripts": {
     "lint": "grunt eslint",
+    "nsp": "grunt nsp",
     "start": "nodemon server.js",
     "test": "grunt test",
     "watch": "grunt watch"

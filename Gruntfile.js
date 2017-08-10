@@ -1,47 +1,45 @@
 module.exports = function (grunt) {
 	grunt.initConfig({
-		pkg : grunt.file.readJSON("package.json"),
+		pkg: grunt.file.readJSON('package.json'),
 		eslint: {
 			target: [
-				"lib/*.js",
-				"test/*.js",
-				"www/assets/js/*.es6"
+				'*.js'
 			]
 		},
-		mochaTest : {
+		mochaTest: {
 			options: {
-				reporter: "spec"
+				reporter: 'spec'
 			},
-			test : {
-				src : ["test/*_test.js"]
+			test: {
+				src: ['test/*_test.js']
 			}
 		},
 		nsp: {
-			package: grunt.file.readJSON("package.json")
+			package: grunt.file.readJSON('package.json')
 		},
-		watch : {
-			js : {
-				files : ["lib/*.js"],
-				tasks : "build"
+		watch: {
+			js: {
+				files: ['lib/*.js'],
+				tasks: 'build'
 			},
 			pkg: {
-				files : "package.json",
-				tasks : "build"
+				files: 'package.json',
+				tasks: 'build'
 			},
-			readme : {
-				files : "README.md",
-				tasks : "build"
+			readme: {
+				files: 'README.md',
+				tasks: 'build'
 			}
 		}
 	});
 
 	// tasks
-	grunt.loadNpmTasks("grunt-eslint");
-	grunt.loadNpmTasks("grunt-mocha-test");
-	grunt.loadNpmTasks("grunt-nsp");
-	grunt.loadNpmTasks("grunt-contrib-watch");
+	grunt.loadNpmTasks('grunt-eslint');
+	grunt.loadNpmTasks('grunt-mocha-test');
+	grunt.loadNpmTasks('grunt-nsp');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// aliases
-	grunt.registerTask("test", ["eslint", "mochaTest", "nsp"]);
-	grunt.registerTask("default", ["test"]);
+	grunt.registerTask('test', ['eslint', 'mochaTest', 'nsp']);
+	grunt.registerTask('default', ['test']);
 };

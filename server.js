@@ -15,7 +15,7 @@ const config = require('./config');			// I.e. ./config.json
 const app = express();
 
 const serverListenPort = config.listenPort;	// || 3000;
- 
+
 app.use(fileUpload());
 
 app.get('/', function (req, res) {
@@ -23,7 +23,7 @@ app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/index.html'); // TW TODO: Use path.join
 });
 
-app.post('/', function(req, res) {
+app.post('/', function (req, res) {
 	console.log('POST /');
 	console.log('req.files is', req.files);
 
@@ -32,9 +32,9 @@ app.post('/', function(req, res) {
 		let fileObject = req.files.file;
 		var destPath = __dirname + '/uploads/' + fileObject.name;
 		fs.writeFile(destPath, fileObject.data, function (errorWriteFile) {
-			
+
 			if (errorWriteFile) {
-				console.error('Error while saving uploaded file:', error);
+				console.error('Error while saving uploaded file:', errorWriteFile);
 				res.status(500).send('Error while saving uploaded file.');
 			} else {
 				console.log('Uploaded file successfully saved.');
@@ -52,11 +52,16 @@ app.get('/jquery.min.js', function (req, res) {
 	res.sendFile(__dirname + '/node_modules/jquery/dist/jquery.min.js');
 });
 
+app.get('/script.js', function (req, res) {
+	// res.redirect('https://code.jquery.com/jquery-3.2.1.min.js');
+	res.sendFile(__dirname + '/script.js');
+});
+
 // Start the server:
 
 var server = app.listen(serverListenPort, function () {
 	let host = server.address().address;
-	
+
 	if (host === '::') {
 		host = 'localhost';
 	}

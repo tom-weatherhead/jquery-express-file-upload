@@ -13,52 +13,50 @@
 		<br />
 
 		<div>
-			<h4>Case 1 : Using a Form</h4>
-			<br />
 			<!-- <form action="http://127.0.0.1:8081/file_upload" method="POST" enctype="multipart/form-data"> -->
 			<!-- <form id="form" action="http://127.0.0.1:8081/file_upload" method="POST" enctype="application/x-www-form-urlencoded"> -->
-			<!-- <form id="form" enctype="multipart/form-data" method="post"> -->
+			<form id="form" enctype="multipart/form-data" method="post">
+				<h4>Case 1 : Using a Form</h4>
+				<br />
 				<!-- <input type="file" name="file" size="50" /> -->
 				<!-- <input type="file" id="file" name="file" required /> -->
 
 				<!-- The <input> of type "file" must have a name; -->
 				<!-- If it is named "foo", then the file data will be POSTed to the server as req.files.foo -->
 
-				<input type="file" id="file" name="file" />
+				<input type="file" id="fileForm" name="fileForm" />
 				<br />
-				<!-- <input type="submit" value="Upload File" /> -->
-				<input id="uploadButton" type="button" value="Upload File" />
-			<!-- </form> -->
+				<input type="submit" value="Upload File" />
+				<!-- <input id="uploadButton" type="button" value="Upload File" /> -->
+			</form>
 		</div>
 
 		<div>
 			<h4>Case 2 : Not Using a Form</h4>
 			<br />
-			<input type="file" id="fileNoForm" name="fileNoForm" />
+			<input type="file" id="fileNoForm" />
 			<br />
 			<input id="uploadButtonNoForm" type="button" value="Upload File" />
 		</div>
 
 		<script type="text/javascript" src="/jquery.min.js"></script>
 		<script>
-			//$("#form").submit(function (event) {
-			//	...
-			//	$.post('file_upload', $('form').serialize());	// ?
-			//	event.preventDefault();
-			//});
+		
+			function sendPostRequest(fileInputTagId) {
+				//alert('sendPostRequest() : ' + fileInputTagId);
 
-			$("#uploadButtonNoForm").click(function () {
-				console.log('#uploadButtonNoForm click');
 				// See https://stackoverflow.com/questions/5392344/sending-multipart-formdata-with-jquery-ajax :
 				var data = new FormData();
 				//jQuery.each(jQuery('#file')[0].files, function(i, file) {
-				//	data.append('file-'+i, file);
+				//	data.append('file-' + i, file);
 				//});
 
 				// See https://stackoverflow.com/questions/6974684/how-to-send-formdata-objects-with-ajax-requests-in-jquery :
-				const fileKeyName = 'fileNoForm';	// If fileKeyName is 'foo', the file data will be accessible in the server's app.post(req, res) event handler as req.files.foo
-				var fileGoodness = $("#fileNoForm")[0].files[0];
+
+				var fileGoodness = $('#' + fileInputTagId)[0].files[0];
 				console.log('fileGoodness:', fileGoodness);
+
+				const fileKeyName = 'fileNoForm';	// If fileKeyName is 'foo', the file data will be accessible in the server's app.post(req, res) event handler as req.files.foo
 				data.append(fileKeyName, fileGoodness);
 
 				$.ajax({
@@ -76,6 +74,20 @@
 						alert('Ajax POST error.');
 					}
 				});
+			}
+
+			$("#form").submit(function (event) {
+				console.log('#form submit()');
+				//alert('#form submit()');
+				//	...
+				//	$.post('file_upload', $('form').serialize());	// ?
+				sendPostRequest('fileForm');
+				event.preventDefault();
+			});
+
+			$("#uploadButtonNoForm").click(function () {
+				console.log('#uploadButtonNoForm click');
+				sendPostRequest('fileNoForm');
 			});
 		</script>
 	</body>

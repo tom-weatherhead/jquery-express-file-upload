@@ -36,38 +36,42 @@
 		<script>
 		
 			function sendPostRequest(fileInputTagId) {
-				//alert('sendPostRequest() : ' + fileInputTagId);
-
 				// See https://stackoverflow.com/questions/5392344/sending-multipart-formdata-with-jquery-ajax :
 				var data = new FormData();
+
 				//jQuery.each(jQuery('#file')[0].files, function(i, file) {
 				//	data.append('file-' + i, file);
 				//});
 
 				// See https://stackoverflow.com/questions/6974684/how-to-send-formdata-objects-with-ajax-requests-in-jquery :
+				let arrayOfFileObjects = $('#' + fileInputTagId)[0].files;
 
-				if (! $('#' + fileInputTagId)[0].files) {
+				if (!arrayOfFileObjects) {
 					let message = "$('#' + fileInputTagId)[0].files is null; aborting POST.";
+
 					console.error(message);
 					alert(message);
 					return;
-				} else if ($('#' + fileInputTagId)[0].files.length == 0) {
-					let message = "$('#' + fileInputTagId)[0].files.length is " + $('#' + fileInputTagId)[0].files.length + "; aborting POST.";
+				} else if (arrayOfFileObjects.length == 0) {
+					let message = "$('#' + fileInputTagId)[0].files.length is " + arrayOfFileObjects.length + "; aborting POST.";
+
 					console.error(message);
 					alert(message);
 					return;
-				} else if (! $('#' + fileInputTagId)[0].files[0]) {
+				} else if (!arrayOfFileObjects[0]) {
 					let message = "$('#' + fileInputTagId)[0].files[0] is null; aborting POST.";
+
 					console.error(message);
 					alert(message);
 					return;
 				}
 
-				var fileGoodness = $('#' + fileInputTagId)[0].files[0];
-				console.log('fileGoodness:', fileGoodness);
+				var fileObject = arrayOfFileObjects[0];
 
-				const fileKeyName = 'file';	// If fileKeyName is 'foo', the file data will be accessible in the server's app.post(req, res) event handler as req.files.foo
-				data.append(fileKeyName, fileGoodness);
+				// If fileKeyName is 'foo', the file data will be accessible in the server's app.post(req, res) event handler as req.files.foo
+				const fileKeyName = 'file';
+
+				data.append(fileKeyName, fileObject);
 
 				$.ajax({
 					url: '/',
@@ -81,9 +85,10 @@
 						alert('Ajax POST success! : ' + result);
 					},
 					error: function (error) {
-						console.error('Ajax POST error:', error);
-						//alert('Ajax POST error : ' + error);
-						alert('Ajax POST error.');
+						let message = 'Ajax POST error: ' + error.status + ' ' + error.statusText;
+
+						console.error(message);
+						alert(message);
 					}
 				});
 			}

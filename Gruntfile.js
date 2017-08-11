@@ -3,7 +3,8 @@ module.exports = function (grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		eslint: {
 			target: [
-				'*.js'
+				'*.js',
+				'test/*_test.js'
 			]
 		},
 		mochaTest: {
@@ -19,7 +20,7 @@ module.exports = function (grunt) {
 		},
 		watch: {
 			js: {
-				files: ['lib/*.js'],
+				files: ['*.js'],
 				tasks: 'build'
 			},
 			pkg: {

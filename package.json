@@ -21,8 +21,7 @@
     "express": "latest",
     "express-fileupload": "latest",
     "jquery": "latest",
-    "nodemon": "latest",
-    "rootpath": "latest"
+    "nodemon": "latest"
   },
   "devDependencies": {
     "babel-cli": "latest",

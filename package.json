@@ -33,7 +33,9 @@
     "grunt-eslint": "latest",
     "grunt-mocha-test": "latest",
     "grunt-nsp": "latest",
-    "mocha": "latest"
+    "mocha": "latest",
+    "really-need": "latest",
+    "supertest": "latest"
   },
   "engineStrict": true,
   "engines": {

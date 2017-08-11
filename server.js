@@ -4,6 +4,10 @@
 // "Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files. It is written on top of busboy for maximum efficiency.
 // NOTE: Multer will not process any form which is not multipart (multipart/form-data)."
 
+// Use "mocha" and "supertest" to do unit testing: See https://www.npmjs.com/package/supertest
+// - For examples of this kind of testing, see "connect" : https://github.com/senchalabs/connect
+// - Better still, see https://glebbahmutov.com/blog/how-to-correctly-unit-test-express-server/
+
 // require('rootpath')();
 
 const express = require('express');
@@ -77,5 +81,7 @@ var server = app.listen(serverListenPort, function () {
 
 	console.log('The Express.js server is listening at http://%s:%s (protocol %s)', host, server.address().port, server.address().family);
 });
+
+module.exports = server;
 
 // End of File.

@@ -5,6 +5,8 @@
 var chai = require('chai');
 var chaiFiles = require('chai-files');
 var chaiHttp = require('chai-http');
+// const fs = require('fs');
+const fse = require('fs-extra');
 const path = require('path');
 
 var app = require('../app');
@@ -17,6 +19,26 @@ var file = chaiFiles.file;
 //var dir = chaiFiles.dir;
 
 describe('App', function() {
+	
+	after(function() {
+		// With promises:
+		fse.emptyDir('uploads')
+			.then(() => {
+				console.log('Empty the uploads directory: Success!');
+			})
+			.catch(err => {
+				console.error('Empty the uploads directory: Error:', err);
+			});
+		// fs.delete('uploads/*');
+		// fs.unlink('uploads/*', function(err) {
+			// if (err) {
+				// console.error('Error whiel unlinking (deleting) all files in uploads:', err);
+			// } else {
+				// console.log('file deleted');
+			// }
+		// });
+	});
+
 	describe('/get', function() {
 		it('responds with status 200', function(done) {
 			chai.request(app)
@@ -43,7 +65,16 @@ describe('App', function() {
 					expect(err).to.be.null;
 					expect(res).to.have.status(201);
 					expect(file(destFilePath)).to.equal(file(nameOfFileToUpload));
-					done();
+					fse.emptyDir('uploads')
+						.then(() => {
+							console.log('Empty the uploads directory: Success!');
+							done();
+						})
+						.catch(err => {
+							console.error('Empty the uploads directory: Error:', err);
+							done();
+						});
+					// done();
 					// TODO: Delete the uploaded copy of the file.
 				});
 		});

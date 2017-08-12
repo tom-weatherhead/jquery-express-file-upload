@@ -5,6 +5,7 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
+const fse = require('fs-extra');
 const path = require('path');
 
 const app = express();
@@ -26,20 +27,28 @@ app.post('/', function (req, res) {
 		console.error('req.files.file is null.');
 		res.status(500).send('req.files.file is null.');
 	} else {
-		// TODO: If the directory __dirname + '/uploads does not exist, create it.
-		let fileObject = req.files.file;
-		var destPath = path.join(__dirname, 'uploads', fileObject.name);
+		fse.ensureDir('uploads')
+			.then(() => {
+				console.log('Ensure that the uploads directory exists: Success!');
 
-		fs.writeFile(destPath, fileObject.data, function (errorWriteFile) {
+				// TODO: If the directory __dirname + '/uploads does not exist, create it.
+				let fileObject = req.files.file;
+				var destPath = path.join(__dirname, 'uploads', fileObject.name);
 
-			if (errorWriteFile) {
-				console.error('Error while saving uploaded file:', errorWriteFile);
-				res.status(500).send('Error while saving uploaded file.');
-			} else {
-				console.log('Uploaded file successfully saved.');
-				res.status(201).send('Uploaded file successfully saved.');
-			}
-		});
+				fs.writeFile(destPath, fileObject.data, function (errorWriteFile) {
+
+					if (errorWriteFile) {
+						console.error('Error while saving uploaded file:', errorWriteFile);
+						res.status(500).send('Error while saving uploaded file.');
+					} else {
+						console.log('Uploaded file successfully saved.');
+						res.status(201).send('Uploaded file successfully saved.');
+					}
+				});
+			})
+			.catch(err => {
+				console.error('Ensure that the uploads directory exists: Error:', err);
+			});
 	}
 });
 

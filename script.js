@@ -1,5 +1,4 @@
-/* eslint no-alert: 0 */
-/* eslint no-undef: 0 */
+// To disable an eslint warning or error for an entire file, use this syntax: /* eslint no-alert: 0 */
 
 // See https://stackoverflow.com/questions/34764287/turning-off-eslint-rule-for-a-specific-file
 
@@ -19,27 +18,27 @@ function sendPostRequest (fileInputTagId) {
 	//});
 
 	// See https://stackoverflow.com/questions/6974684/how-to-send-formdata-objects-with-ajax-requests-in-jquery :
-	let arrayOfFileObjects = $('#' + fileInputTagId)[0].files;
+	let arrayOfFileObjects = $('#' + fileInputTagId)[0].files;	// eslint-disable-line no-undef
 
 	if (!arrayOfFileObjects) {
 		let message = "$('#' + fileInputTagId)[0].files is null; aborting POST.";
 
 		console.error(message);
-		alert(message);
+		alert(message);		// eslint-disable-line no-alert
 
 		return;
 	} else if (arrayOfFileObjects.length === 0) {
 		let message = "$('#' + fileInputTagId)[0].files.length is " + arrayOfFileObjects.length + '; aborting POST.';
 
 		console.error(message);
-		alert(message);
+		alert(message);		// eslint-disable-line no-alert
 
 		return;
 	} else if (!arrayOfFileObjects[0]) {
 		let message = "$('#' + fileInputTagId)[0].files[0] is null; aborting POST.";
 
 		console.error(message);
-		alert(message);
+		alert(message);		// eslint-disable-line no-alert
 
 		return;
 	}
@@ -51,7 +50,7 @@ function sendPostRequest (fileInputTagId) {
 
 	data.append(fileKeyName, fileObject);
 
-	$.ajax({
+	$.ajax({		// eslint-disable-line no-undef
 		url: '/',
 		data: data,
 		cache: false,
@@ -60,24 +59,24 @@ function sendPostRequest (fileInputTagId) {
 		type: 'POST',
 		success: function (result) {
 			console.log('Ajax POST success! : ', result);
-			alert('Ajax POST success! : ' + result);
+			alert('Ajax POST success! : ' + result);		// eslint-disable-line no-alert
 		},
 		error: function (error) {
 			let message = 'Ajax POST error: ' + error.status + ' ' + error.statusText + ' : ' + error.responseText;
 
 			console.error(message);
-			alert(message);
+			alert(message);		// eslint-disable-line no-alert
 		}
 	});
 }
 
-$('#form').submit(function (event) {
+$('#form').submit(function (event) {		// eslint-disable-line no-undef
 	console.log('#form submit()');
 	sendPostRequest('fileForm');
 	event.preventDefault();
 });
 
-$('#uploadButtonNoForm').click(function () {
+$('#uploadButtonNoForm').click(function () {		// eslint-disable-line no-undef
 	console.log('#uploadButtonNoForm click');
 	sendPostRequest('fileNoForm');
 });

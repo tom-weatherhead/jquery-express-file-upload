@@ -1,5 +1,3 @@
-/* eslint no-unused-expressions: 0 */
-
 // jquery-express-file-upload/test/app_spec.js
 
 // Use chai and chai-http. See https://groundberry.github.io/development/2016/12/10/testing-express-with-mocha-and-chai.html and our repo test-express-mocha-chai-perello
@@ -26,7 +24,7 @@ describe('App', function () {
 			chai.request(app)
 				.get('/')
 				.end(function (err, res) {
-					expect(err).to.be.null;
+					expect(err).to.be.null;		// eslint-disable-line no-unused-expressions
 					expect(res).to.have.status(200);
 					// expect(res.text).to.equal('somevalue');
 					done();
@@ -44,7 +42,7 @@ describe('App', function () {
 				.post('/')
 				.attach('file', fs.readFileSync(nameOfFileToUpload), nameOfFileToUpload)
 				.end(function (err, res) {
-					expect(err).to.be.null;
+					expect(err).to.be.null;		// eslint-disable-line no-unused-expressions
 					expect(res).to.have.status(201);
 					expect(file(destFilePath)).to.equal(file(nameOfFileToUpload));
 					fse.emptyDir('uploads')
@@ -67,9 +65,9 @@ describe('App', function () {
 			chai.request(app)
 				.get('/teapot')
 				.end(function (err, res) {
-					expect(err).not.to.be.null;
-					expect(err).to.not.be.null;
-					expect(err).to.be.not.null;
+					expect(err).not.to.be.null;		// eslint-disable-line no-unused-expressions
+					expect(err).to.not.be.null;		// eslint-disable-line no-unused-expressions
+					expect(err).to.be.not.null;		// eslint-disable-line no-unused-expressions
 
 					expect(res).to.have.status(418);
 					expect(res.text).to.equal('I\'m a teapot');

@@ -13,10 +13,11 @@
   },
   "scripts": {
     "lint": "grunt eslint",
+    "mocha": "grunt mochaTest",
+    "mocha2": "mocha",
     "nsp": "grunt nsp",
     "start": "nodemon server.js",
-    "test": "mocha",
-    "test-old": "grunt test",
+    "test": "grunt test",
     "watch": "grunt watch"
   },
   "dependencies": {
@@ -29,6 +30,7 @@
     "babel-cli": "latest",
     "babel-preset-env": "latest",
     "chai": "latest",
+    "chai-files": "latest",
     "chai-http": "latest",
     "grunt": "latest",
     "grunt-cli": "latest",

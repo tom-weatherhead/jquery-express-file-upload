@@ -16,6 +16,7 @@
     "nsp": "grunt nsp",
     "start": "nodemon server.js",
     "test": "grunt test",
+    "test2": "mocha",
     "watch": "grunt watch"
   },
   "dependencies": {
@@ -27,21 +28,22 @@
   "devDependencies": {
     "babel-cli": "latest",
     "babel-preset-env": "latest",
+    "chai": "latest",
+    "chai-http": "latest",
     "grunt": "latest",
     "grunt-cli": "latest",
     "grunt-contrib-watch": "latest",
     "grunt-eslint": "latest",
     "grunt-mocha-test": "latest",
     "grunt-nsp": "latest",
-    "mocha": "latest",
-    "really-need": "latest",
-    "supertest": "latest"
+    "mocha": "latest"
   },
   "engineStrict": true,
   "engines": {
     "node": ">=8.0.0"
   },
   "keywords": [
+    "chai",
     "eslint",
     "express",
     "grunt",

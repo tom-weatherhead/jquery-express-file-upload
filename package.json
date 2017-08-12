@@ -23,7 +23,7 @@
   "dependencies": {
     "express": "latest",
     "express-fileupload": "latest",
-    "fs-extra": "^4.0.1",
+    "fs-extra": "latest",
     "jquery": "latest",
     "nodemon": "latest"
   },

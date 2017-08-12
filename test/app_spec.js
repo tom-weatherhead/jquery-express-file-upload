@@ -41,10 +41,23 @@ describe('App', function() {
 				.attach('file', fs.readFileSync(nameOfFileToUpload), nameOfFileToUpload)
 				.end(function(err, res) {
 					expect(err).to.be.null;
-					expect(res).to.have.status(200);
+					expect(res).to.have.status(201);
 					expect(file(destFilePath)).to.equal(file(nameOfFileToUpload));
 					done();
 					// TODO: Delete the uploaded copy of the file.
+				});
+		});
+	});
+
+	describe('/get teapot', function() {
+		it('responds with status 200', function(done) {
+			chai.request(app)
+				.get('/teapot')
+				.end(function(err, res) {
+					expect(err).to.not.be.null
+					expect(res).to.have.status(418);
+					expect(res.text).to.equal('I\'m a teapot');
+					done();
 				});
 		});
 	});

@@ -4,7 +4,7 @@ module.exports = function (grunt) {
 		eslint: {
 			target: [
 				'*.js',
-				'test/*_test.js'
+				'test/*_spec.js'
 			]
 		},
 		mochaTest: {
@@ -34,13 +34,13 @@ module.exports = function (grunt) {
 		}
 	});
 
-	// tasks
+	// Tasks
 	grunt.loadNpmTasks('grunt-eslint');
 	grunt.loadNpmTasks('grunt-mocha-test');
 	grunt.loadNpmTasks('grunt-nsp');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	// aliases
+	// Aliases
 	grunt.registerTask('test', ['eslint', 'mochaTest', 'nsp']);
 	grunt.registerTask('default', ['test']);
 };

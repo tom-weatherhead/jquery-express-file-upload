@@ -37,10 +37,21 @@ app.post('/', function (req, res) {
 				res.status(500).send('Error while saving uploaded file.');
 			} else {
 				console.log('Uploaded file successfully saved.');
-				res.send('Uploaded file successfully saved.');
+				res.status(201).send('Uploaded file successfully saved.');
 			}
 		});
 	}
+});
+
+app.get('/teapot', function (req, res) {
+	// See https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+	// See https://en.wikipedia.org/wiki/Hyper_Text_Coffee_Pot_Control_Protocol
+	// See https://httpstatuses.com/418
+	// See https://stackoverflow.com/questions/24018008/is-there-a-server-that-implements-http-status-code-418
+	// See especially https://www.google.com/teapot
+	console.log('GET /teapot : Responding with HTTP status code 418...');
+	res.sendStatus(418);
+	// Or res.status(418).send('The teapot is responding to the request to brew coffee...');
 });
 
 app.get('/jquery.min.js', function (req, res) {

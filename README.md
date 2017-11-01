@@ -1,4 +1,7 @@
 # jquery-express-file-upload
+
+[![build status](https://secure.travis-ci.org/tom-weatherhead/jquery-express-file-upload.svg)](http://travis-ci.org/tom-weatherhead/jquery-express-file-upload)
+
 A minimal example of a file upload Web application with a jQuery client and an Express.js server.
 
 To download, install, and run this application:

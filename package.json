@@ -21,25 +21,25 @@
     "watch": "grunt watch"
   },
   "dependencies": {
-    "express": "latest",
-    "express-fileupload": "latest",
-    "fs-extra": "latest",
-    "jquery": "latest",
-    "nodemon": "latest"
+    "express": "^4.16.2",
+    "express-fileupload": "^0.3.0",
+    "fs-extra": "^4.0.2",
+    "jquery": "^3.2.1",
+    "nodemon": "^1.12.1"
   },
   "devDependencies": {
-    "babel-cli": "latest",
-    "babel-preset-env": "latest",
-    "chai": "latest",
-    "chai-files": "latest",
-    "chai-http": "latest",
-    "grunt": "latest",
-    "grunt-cli": "latest",
-    "grunt-contrib-watch": "latest",
-    "grunt-eslint": "latest",
-    "grunt-mocha-test": "latest",
-    "grunt-nsp": "latest",
-    "mocha": "latest"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.2",
+    "chai-files": "^1.4.0",
+    "chai-http": "^3.0.0",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-eslint": "^20.1.0",
+    "grunt-mocha-test": "^0.13.3",
+    "grunt-nsp": "^2.3.1",
+    "mocha": "^4.0.1"
   },
   "engineStrict": true,
   "engines": {
